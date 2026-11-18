@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portería - Registro Personal</title>
+
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/porteria.css">
+</head>
+<body>
+
+<main class="container">
+
+    <section class="card">
+
+        <h1>Registro de Personal</h1>
+
+        <p class="subtitle">
+            Buscar DNI, apellido o nombre
+        </p>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Ej: Pérez o 30123456"
+            autocomplete="off"
+        >
+
+        <div id="results" class="results"></div>
+
+    </section>
+
+</main>
+
+<div id="confirmModal" class="modal hidden">
+
+    <div class="modal-content">
+
+        <h2 id="modalTitle">
+            Confirmar registro
+        </h2>
+
+        <div class="modal-person">
+            <h3 id="modalName"></h3>
+            <p id="modalDni"></p>
+            <span id="modalHora"></span>
+        </div>
+
+        <div class="modal-actions">
+
+            <button id="cancelBtn" class="cancel-btn">
+                Cancelar
+            </button>
+
+            <button id="confirmBtn" class="confirm-btn">
+                Confirmar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="deviceModal" class="modal hidden">
+
+    <div class="modal-content">
+
+        <h2>
+            Autorizar dispositivo
+        </h2>
+
+        <p class="device-help">
+            Ingresá el código del celular de portería.
+        </p>
+
+        <input
+            type="password"
+            id="deviceTokenInput"
+            class="device-input"
+            placeholder="Código de dispositivo"
+            autocomplete="off"
+        >
+
+        <div class="modal-actions">
+
+            <button
+                id="saveDeviceBtn"
+                class="confirm-btn"
+            >
+                Guardar dispositivo
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script src="../assets/js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Login - Mater Purissima
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/global.css"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            min-height:
+                100vh;
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            background:
+                linear-gradient(
+                    rgba(14,42,71,.9),
+                    rgba(14,42,71,.9)
+                ),
+                url("../assets/img/fondo-mater.png");
+
+            background-size:
+                cover;
+
+            background-position:
+                center;
+        }
+
+        .login-card {
+
+            width:
+                420px;
+
+            background:
+                rgba(255,255,255,.96);
+
+            border-radius:
+                28px;
+
+            padding:
+                45px;
+
+            text-align:
+                center;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,.25);
+        }
+
+        .logo {
+
+            width:
+                110px;
+
+            margin-bottom:
+                20px;
+        }
+
+        h1 {
+
+            color:
+                #0e2a47;
+
+            margin-bottom:
+                8px;
+
+            font-size:
+                30px;
+        }
+
+        .subtitle {
+
+            color:
+                #64748b;
+
+            margin-bottom:
+                35px;
+        }
+
+        .login-btn {
+
+            width:
+                100%;
+
+            border:
+                none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0c5ea8,
+                    #154c8d
+                );
+
+            color:
+                white;
+
+            padding:
+                18px;
+
+            border-radius:
+                16px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                16px;
+
+            font-weight:
+                bold;
+        }
+
+        #status {
+
+            margin-top:
+                20px;
+
+            color:
+                #475569;
+
+            font-weight:
+                bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+    <img
+        src="../assets/img/logo-mater.png"
+        alt="Mater Purissima"
+        class="logo"
+    >
+
+    <h1>
+        Sistema de Registro
+    </h1>
+
+    <p class="subtitle">
+        Colegio Mater Purissima
+    </p>
+
+    <button
+        class="login-btn"
+        onclick="login()"
+    >
+        Ingresar con cuenta institucional
+    </button>
+
+    <p id="status"></p>
+
+</div>
+
+<script>
+
+const AUTH_URL =
+"https://script.google.com/macros/s/AKfycbysdUcvHyHPYIyEjkqPJipvmUjV6IQ6jaCvyUauQ8dllZxnRtMzbZ8AU6-svBJS52mm/exec";
+
+window.onload = () => {
+
+
+    console.log(
+        "Sesion limpia"
+    );
+
+    try {
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const loginData =
+            params.get(
+                "login"
+            );
+
+        if (
+            !loginData
+        ) {
+            return;
+        }
+
+        const usuario =
+            JSON.parse(
+                atob(
+                    loginData
+                        .replace(/-/g, "+")
+                        .replace(/_/g, "/")
+                )
+            );
+
+        console.log(
+            "USUARIO:",
+            usuario
+        );
+
+        if (
+            !usuario.ok
+        ) {
+
+            window.location.href =
+                "./unauthorized.html";
+
+            return;
+        }
+
+        localStorage.setItem(
+            "usuarioLogueado",
+            JSON.stringify(
+                usuario
+            )
+        );
+
+        document
+            .getElementById(
+                "status"
+            )
+            .innerText =
+            "Acceso autorizado";
+
+        // NUEVA SEGURIDAD: Limpiar la URL para borrar el Token Base64 de la barra de direcciones
+        window.history.replaceState({}, document.title, window.location.pathname);
+
+        setTimeout(() => {
+
+            if (
+                usuario.rol
+                === "ADMIN"
+            ) {
+
+                window.location.href =
+                    "admin.html";
+
+            } else {
+
+                window.location.href =
+                    "porteria.html";
+            }
+
+        }, 500);
+
+    } catch (error) {
+
+        console.error(
+            "ERROR LOGIN:",
+            error
+        );
+
+        document
+            .getElementById(
+                "status"
+            )
+            .innerText =
+            "Error procesando login";
+    }
+};
+
+function login() {
+    const status = document.getElementById("status");
+    status.innerText = "Redirigiendo a Google...";
+
+    // Captura la ruta y recorta el nombre del archivo para que quede solo la carpeta base
+    let currentPath = window.location.href.split('?')[0];
+    currentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+
+    const url = `${AUTH_URL}?action=auth&origin=` + encodeURIComponent(currentPath);
+
+    console.log("REDIRECT:", url);
+    window.location.href = url;
+}
+
+</script>
+
+</body>
+</html>
+

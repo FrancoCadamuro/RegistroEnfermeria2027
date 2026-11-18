@@ -1,0 +1,396 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Panel Administrativo
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/admin.css"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="header">
+
+
+        <div class="status-live">
+
+            Sistema conectado ·
+            Actualización automática
+
+        </div>
+
+
+        <div class="logo-container">
+
+            <img
+                src="../assets/img/logo-mater.png"
+                alt="Mater Purissima"
+                class="logo"
+            >
+
+            <div>
+
+                <h1>
+                    Sistema de Registro
+                </h1>
+
+                <p>
+                    Colegio Mater Purissima
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="header-right">
+
+            <div id="reloj">
+                --:--
+            </div>
+
+            <div id="usuario">
+                Cargando usuario...
+            </div>
+
+            <button
+                class="logout-btn"
+                onclick="cerrarSesion()"
+            >
+                Cerrar sesión
+            </button>
+
+        </div>
+
+    </header>
+
+<section class="cards">
+
+    <div class="card">
+
+        <h3>Horas hoy</h3>
+
+        <span
+            id="cardHoras"
+            class="numero"
+        >
+            0h
+        </span>
+
+        <small>
+            Tiempo trabajado acumulado
+        </small>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Personal presente</h3>
+
+        <span
+            id="cardPresentes"
+            class="numero"
+        >
+            0
+        </span>
+
+        <small>
+            Actualmente en el colegio
+        </small>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Ingresos hoy</h3>
+
+        <span
+            id="cardIngresos"
+            class="numero"
+        >
+            0
+        </span>
+
+        <small>
+            Registros del día
+        </small>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Egresos hoy</h3>
+
+        <span
+            id="cardEgresos"
+            class="numero"
+        >
+            0
+        </span>
+
+        <small>
+            Salidas registradas
+        </small>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Jornadas abiertas</h3>
+
+        <span
+            id="cardAbiertas"
+            class="numero"
+        >
+            0
+        </span>
+
+        <small>
+            Personal aún presente
+        </small>
+
+    </div>
+
+</section>
+
+    <section class="panel">
+
+    <div class="tabla-container">
+
+    <h2>
+        Personal presente
+    </h2>
+
+    <table>
+
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>DNI</th>
+            <th>Hora ingreso</th>
+        </tr>
+        </thead>
+
+        <tbody id="tablaPresentes">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<div class="tabla-container">
+
+    <h2>
+        Últimos movimientos
+    </h2>
+
+    <table>
+
+        <thead>
+        <tr>
+            <th>Hora</th>
+            <th>Nombre</th>
+            <th>Movimiento</th>
+        </tr>
+        </thead>
+
+        <tbody id="tablaMovimientos">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</section>
+
+
+<section class="resumen-section">
+
+    <div class="tabla-container">
+
+        <h2>
+            Resumen del día
+        </h2>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Personal</th>
+                <th>Jornadas</th>
+                <th>Horas</th>
+            </tr>
+            </thead>
+
+            <tbody id="tablaResumen">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<section class="historial-section">
+
+    <div class="tabla-container">
+
+        <div class="historial-header">
+
+            <h2>
+                Historial de movimientos
+            </h2>
+
+            <button
+                id="btnToggleHistorial"
+                class="secondary-btn"
+            >
+                Ver historial
+            </button>
+
+        </div>
+
+        <div id="historialContenido">
+
+            <div class="filtros">
+
+                <input
+                    type="text"
+                    id="buscarHistorial"
+                    placeholder="Buscar DNI o nombre"
+                >
+
+                <input
+                    type="date"
+                    id="fechaHistorial"
+                >
+
+                <button id="btnBuscar">
+                    Buscar
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Nombre</th>
+                    <th>Movimiento</th>
+                </tr>
+                </thead>
+
+                <tbody id="tablaHistorial">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="reporte-section">
+
+    <div class="tabla-container">
+
+        <div class="historial-header">
+
+            <h2>
+                Reporte mensual
+            </h2>
+
+            <div class="filtros">
+
+                <select id="mesReporte">
+
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6" selected>Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    id="anioReporte"
+                    value="2026"
+                >
+
+                <button
+                    id="btnReporte"
+                >
+                    Ver reporte
+                </button>
+
+                <button
+                    id="btnExportar"
+                >
+                    Exportar Excel
+                </button>
+
+            </div>
+
+        </div>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Personal</th>
+                <th>Jornadas</th>
+                <th>Horas</th>
+            </tr>
+            </thead>
+
+            <tbody id="tablaReporte">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+</div>
+
+<script defer src="../assets/js/api.js"></script>
+<script defer src="../assets/js/utils.js"></script>
+<script defer src="../assets/js/admin.js"></script>
+
+</body>
+</html>

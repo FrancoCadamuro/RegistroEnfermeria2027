@@ -1,0 +1,329 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            rgba(5, 34, 77, 0.88),
+            rgba(5, 34, 77, 0.88)
+        ),
+        url("../img/fondo-mater.png");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+.card {
+    width: 100%;
+    max-width: 850px;
+
+    background: rgba(255,255,255,0.96);
+
+    border-radius: 24px;
+
+    padding: 40px;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.18);
+
+    backdrop-filter: blur(8px);
+}
+
+.card h1 {
+    margin: 0;
+
+    color: #0a2b63;
+
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.subtitle {
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+    color: #6b7280;
+    font-size: 18px;
+}
+
+#searchInput {
+    width: 100%;
+
+    padding: 22px 25px;
+
+    border: 2px solid #d9e2ec;
+    border-radius: 18px;
+
+    font-size: 24px;
+
+    outline: none;
+
+    transition: .2s;
+}
+
+#searchInput:focus {
+    border-color: #0a2b63;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(10,43,99,.12);
+}
+
+.results {
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.person-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #f8fafc;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    transition: .2s;
+}
+
+.person-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.08);
+}
+
+.person-info h3 {
+    margin: 0;
+
+    color: #0a2b63;
+    font-size: 24px;
+}
+
+.person-info p {
+    margin: 6px 0;
+
+    color: #666;
+}
+
+.person-info span {
+    color: #8a8a8a;
+    font-size: 14px;
+}
+
+.register-btn {
+    border: none;
+    border-radius: 14px;
+
+    padding: 14px 24px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.ingreso-btn {
+    background: #0f9d58;
+    color: white;
+}
+
+.ingreso-btn:hover {
+    transform: scale(1.03);
+}
+
+.egreso-btn {
+    background: #d93025;
+    color: white;
+}
+
+.egreso-btn:hover {
+    transform: scale(1.03);
+}
+
+/* MODAL */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.55);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+
+    width: 90%;
+    max-width: 500px;
+
+    border-radius: 24px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    animation: fadeIn .18s ease;
+}
+
+.modal-content h2 {
+    color: #0a2b63;
+    margin-top: 0;
+}
+
+.modal-person h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.modal-person p {
+    color: #666;
+}
+
+#modalHora {
+    display: inline-block;
+
+    margin-top: 10px;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    color: #0a2b63;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.modal-actions button {
+    flex: 1;
+
+    border: none;
+    border-radius: 14px;
+
+    padding: 16px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background: #e5e7eb;
+}
+
+.confirm-btn {
+    background: #0a2b63;
+    color: white;
+}
+
+/* TOAST */
+
+.toast {
+    position: fixed;
+
+    bottom: 30px;
+    right: 30px;
+
+    background: #0f9d58;
+    color: white;
+
+    padding: 18px 24px;
+
+    border-radius: 14px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,.2);
+}
+
+.empty-message {
+    text-align: center;
+    color: #666;
+
+    padding: 25px;
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: scale(.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* DISPOSITIVO */
+
+.device-help {
+    color: #64748b;
+    margin: 10px 0 18px;
+    line-height: 1.4;
+}
+
+.device-input {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 1px solid #d7dce3;
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    margin-bottom: 18px;
+
+    outline: none;
+}
+
+.device-input:focus {
+    border-color: #0c5ea8;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(12, 94, 168, .15);
+}
